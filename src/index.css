@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Pagination as LINES */
+.swiper-pagination-bullet {
+  width: 30px;
+  height: 4px;
+  border-radius: 0;
+  background: white;
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  background: #22c55e; /* green-500 */
+  opacity: 1;
+}
+
+/* Move pagination slightly upward */
+.swiper-pagination {
+  bottom: 15px !important;
+}
+
+.active {
+  background-color: rgba(124, 125, 125, 0.139);
+  font-weight: bold;
+  border-bottom: 2px solid rgb(58, 58, 58);
+}
