@@ -16,7 +16,7 @@
 
 | **Home Page** | **User Dashboard** |
 |:---:|:---:|
-| <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20165438.png?raw=true" width="400" /> | <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20170045.png?raw=true" width="400" /> |
+| <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20165438.png?raw=true" width="400" /> | <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20172841.png?raw=true" width="400" /> |
 
 ---
 
