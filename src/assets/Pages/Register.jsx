@@ -1,21 +1,24 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
-import { getAuth, signInWithPopup, updateProfile } from "firebase/auth";
-
-import { GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, updateProfile, GoogleAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
+
+// Icons
+import { FaGoogle, FaEye, FaEyeSlash, FaUser, FaImage } from "react-icons/fa";
+import { MdEmail, MdLock } from "react-icons/md";
 
 const Register = () => {
   const { CreateUser, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [nameError, setNameError] = useState("");
-  const navigate = useNavigate();
   const [passError, setPassError] = useState("");
-
-  // Popup sign in
-  const provider = new GoogleAuthProvider();
+  const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
+
+  const provider = new GoogleAuthProvider();
 
   const popUpLogin = () => {
     const auth = getAuth();
@@ -39,20 +42,19 @@ const Register = () => {
   };
 
   const handleRegister = (e) => {
-    e.preventDefault(); // prevents the form from loading
-    const form = e.target; // return the hole form
+    e.preventDefault();
+    const form = e.target;
     const name = form.name.value;
     const photoUrl = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    if (name.length < 5) {
-      setNameError("Name Should Be grater than 5 character");
-      return;
-    } else {
-      setNameError("");
-    }
 
-    // Password validation
+    // Validation logic...
+    if (name.length < 5) {
+      setNameError("Name must be greater than 5 characters");
+      return;
+    } else setNameError("");
+
     if (password.length < 6) {
       setPassError("Password must be at least 6 characters long");
       return;
@@ -67,8 +69,6 @@ const Register = () => {
       setPassError("Password must contain at least one lowercase letter (a-z)");
       return;
     }
-
-    // If all fine → clear error
     setPassError("");
 
     CreateUser(email, password)
@@ -91,115 +91,135 @@ const Register = () => {
               timerProgressBar: true,
             });
             navigate("/");
-
-            // Profile updated!
-            // ...
           })
-          .catch((error) => {
-            setUser(user);
-            // An error occurred
-            // ...
-          });
+          .catch(() => setError("Failed to update profile."));
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // toast.error(errorMessage);
-
-        // ..
-      });
+      .catch((error) => setPassError(error.message));
   };
-  return (
-    <div className="flex justify-center  my-10">
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <h1 className="font-semibold text-2xl text-center mt-4">
-          Register Your Account
-        </h1>
-        <form className="card-body" onSubmit={handleRegister}>
-          <fieldset className="fieldset">
-            <label className="label">Your Name</label>
-            <input
-              type="text"
-              name="name"
-              required
-              className="input"
-              placeholder="Enter your name"
-            />
-            {nameError && (
-              <p className="text-red-500 text-[12px]">{nameError}</p>
-            )}
-            <label className="label">Photo URL</label>
-            <input
-              type="text"
-              name="photo"
-              required
-              className="input"
-              placeholder="Enter photo url"
-            />
-            <label className="label">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="input"
-              placeholder="Email"
-            />
-            <label className="label">Password</label>
-            <input
-              type="password"
-              name="password"
-              required
-              className="input"
-              placeholder="Password"
-            />
-            {passError && (
-              <p className="text-red-500 text-[12px]">{passError}</p>
-            )}
-            <button type="submit" className="btn btn-neutral mt-4">
-              Register
-            </button>
 
-            <p className="text-[14px]">
-              Already have An Account ?{" "}
-              <Link to="/auth/login">
-                <span className="text-red-500 font-semibold">Login</span>
-              </Link>{" "}
-            </p>
-          </fieldset>
+  return (
+    <div className="min-h-screen bg-base-200 flex items-center justify-center py-10 px-4">
+      
+      {/* Card Container - max-w-lg keeps it from getting too wide on large screens */}
+      <div className="card bg-base-100 w-full max-w-lg shadow-2xl rounded-xl">
+        <div className="card-body p-8 sm:p-10">
+          
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-extrabold text-base-content">Create Account</h2>
+            <p className="text-base-content/60 mt-2">Sign up to get started with PawMart</p>
+          </div>
+
+          {/* Social Register Button - Full Width */}
           <button
             onClick={popUpLogin}
-            className="btn bg-white text-black border-[#e5e5e5]"
+            className="btn btn-outline w-full flex items-center justify-center gap-3 text-lg hover:bg-base-200 hover:text-base-content mb-6"
           >
-            <svg
-              aria-label="Google logo"
-              width="16"
-              height="16"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-            >
-              <g>
-                <path d="m0 0H512V512H0" fill="#fff"></path>
-                <path
-                  fill="#34a853"
-                  d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-                ></path>
-                <path
-                  fill="#4285f4"
-                  d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-                ></path>
-                <path
-                  fill="#fbbc02"
-                  d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-                ></path>
-                <path
-                  fill="#ea4335"
-                  d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-                ></path>
-              </g>
-            </svg>
-            Signup With Google
+            <FaGoogle className="text-red-500" /> 
+            <span>Sign up with Google</span>
           </button>
-        </form>
+
+          <div className="divider text-xs text-base-content/40 uppercase font-semibold my-6">Or continue with email</div>
+
+          {/* Form */}
+          <form onSubmit={handleRegister} className="flex flex-col gap-5">
+            
+            {/* Name Field */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-semibold">Full Name</span>
+              </label>
+              <label className="input input-bordered w-full flex items-center gap-3 focus-within:ring-2 focus-within:ring-primary focus-within:border-primary focus-within:outline-none transition-all">
+                <FaUser className="text-base-content/50" />
+                <input
+                  type="text"
+                  name="name"
+                  className="grow w-full border-none focus:ring-0" 
+                  placeholder="John Doe"
+                  required
+                />
+              </label>
+              {nameError && <span className="text-red-500 text-xs mt-1 ml-1">{nameError}</span>}
+            </div>
+
+            {/* Photo URL Field */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-semibold">Photo URL</span>
+              </label>
+              <label className="input input-bordered w-full flex items-center gap-3 focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all">
+                <FaImage className="text-base-content/50" />
+                <input
+                  type="text"
+                  name="photo"
+                  className="grow w-full border-none focus:ring-0"
+                  placeholder="https://..."
+                  required
+                />
+              </label>
+            </div>
+
+            {/* Email Field */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-semibold">Email Address</span>
+              </label>
+              <label className="input input-bordered w-full flex items-center gap-3 focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all">
+                <MdEmail className="text-base-content/50 text-lg" />
+                <input
+                  type="email"
+                  name="email"
+                  className="grow w-full border-none focus:ring-0"
+                  placeholder="name@example.com"
+                  required
+                />
+              </label>
+            </div>
+
+            {/* Password Field */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-semibold">Password</span>
+              </label>
+              <label className="input input-bordered w-full flex items-center gap-3 relative focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all">
+                <MdLock className="text-base-content/50 text-lg" />
+                <input
+                  type={showPass ? "text" : "password"}
+                  name="password"
+                  className="grow w-full border-none focus:ring-0 pr-8"
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPass(!showPass)}
+                  className="absolute right-4 text-base-content/60 hover:text-primary transition-colors cursor-pointer"
+                >
+                  {showPass ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </label>
+              {passError && <span className="text-red-500 text-xs mt-1 ml-1">{passError}</span>}
+            </div>
+
+            {/* Global Error */}
+            {error && <div className="alert alert-error text-sm py-2 rounded-lg">{error}</div>}
+
+            {/* Submit Button - Full Width */}
+            <div className="form-control mt-4">
+              <button type="submit" className="btn btn-primary w-full text-lg shadow-md hover:scale-[1.01] transition-transform">
+                Register
+              </button>
+            </div>
+          </form>
+
+          {/* Footer */}
+          <p className="text-center text-sm mt-6 text-base-content/70">
+            Already have an account?{" "}
+            <Link to="/auth/login" className="text-primary font-bold hover:underline">
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -59,6 +59,8 @@ const Home = () => {
               essential pet products
             </p>
           </div>
+
+          
         </div>
       </div>
 
