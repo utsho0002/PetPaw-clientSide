@@ -16,7 +16,7 @@
 
 | Home Page | User Dashboard |
 |:---:|:---:|
-| ![Home](https://ibb.co.com/xQcgG19) | ![Dashboard](https://via.placeholder.com/500x300?text=Dashboard+Preview) |
+| <img src="https://ibb.co.com/xQcgG19"> | ![Dashboard](https://via.placeholder.com/500x300?text=Dashboard+Preview) |
 
 ---
 
