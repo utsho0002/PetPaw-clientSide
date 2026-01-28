@@ -7,17 +7,16 @@
 
 **PawMart** is a full-stack web application designed to connect pet owners with professional grooming and care services. This repository contains the **Frontend/Client-side** code, built with modern web technologies to ensure a fast, responsive, and interactive user experience.
 
-🔗 **Live Demo:** https://petpaw-1688a.web.app/
-🔗 **Server Repository:** [Insert Your Backend Github Link Here]
+🔗 **Live Demo:** [https://petpaw-1688a.web.app/](https://petpaw-1688a.web.app/)  
+🔗 **Server Repository:** [Link_To_Your_Server_Repo_Here]
 
 ---
 
 ## 📸 Screenshots
 
-
+| **Home Page** | **User Dashboard** |
 |:---:|:---:|
-| <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20165438.png?raw=true"> | 
-<img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20170045.png?raw=true"> |
+| <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20165438.png?raw=true" width="400" /> | <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20170045.png?raw=true" width="400" /> |
 
 ---
 
@@ -64,6 +63,29 @@ Follow these steps to run the project on your local machine.
 * The Backend Server running locally (Port 3000)
 
 ### 1. Clone the Repository
-```bash
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-cd your-repo-name
+git clone [https://github.com/utsho0002/PetPaw-clientSide.git](https://github.com/utsho0002/PetPaw-clientSide.git)
+cd PetPaw-clientSide
+
+### 2. Install Dependencies
+npm install
+
+### 3. Environment Setup
+Create a .env.local file in the root directory and add your Firebase credentials:
+
+### Code snippet
+VITE_APIKey=your_firebase_api_key
+VITE_AuthDomain=your_project.firebaseapp.com
+VITE_ProjectId=your_project_id
+VITE_StorageBucket=your_project.appspot.com
+VITE_MessagingSenderId=your_sender_id
+VITE_AppId=your_app_id
+
+### 4. Run the Application
+
+npm run dev
+The app will start at http://localhost:5173.
+
+### 🤝 Contact
+Utsho
+GitHub: utsho0002
+This project was created for educational purposes to demonstrate Full Stack development skills.
