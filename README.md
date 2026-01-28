@@ -14,7 +14,7 @@
 
 ## 📸 Screenshots
 
-| Home Page | User Dashboard |
+
 |:---:|:---:|
 | <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20165438.png?raw=true"> | 
 <img src="https://github.com/utsho0002/PetPaw-clientSide/blob/main/Screenshot%202026-01-28%20170045.png?raw=true"> |
